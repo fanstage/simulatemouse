@@ -1,0 +1,7 @@
+@import './base.css';
+
+#search{
+  border: 2px solid;
+        border-radius: 5px;
+        height: 30px
+}
