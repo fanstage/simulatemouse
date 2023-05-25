@@ -1,6 +1,6 @@
 <template>
     <div v-show="isLogin" class="login" style="margin:0px 15px;background-color: #f2f2f2;text-align: center;">
-        <img src="src\assets\melogo.png" alt="好记性" style="padding-top: 70px;">
+        <img src="../assets/melogo.png" alt="好记性" style="padding-top: 70px;">
         <h1 style="padding-top: 20px;">好记性</h1>
         <div style="width: 80%;margin-left: 10%;">
             <el-input v-model="inputPhone" type="userid" placeholder="请输入账号" clearable style="margin-top:20px ;" />
@@ -33,12 +33,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { ArrowLeft, ArrowRight, Avatar, Delete, Edit, Histogram, HomeFilled, Menu, Promotion, Search, Share, StarFilled, SuccessFilled, Upload, UploadFilled, UserFilled } from '@element-plus/icons-vue'
-import router from '../../router';
+import router from '../router';
 const input = ref('')
 </script>
 <script lang="ts">
 import axios from 'axios'
-import { userLogin, userRegister,goodsData } from "../../api";
+import { userLogin, userRegister,goodsData,wordsData } from "../api";
 export default {
     name: "src/views/login/login.vue",
     data() {

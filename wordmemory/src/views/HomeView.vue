@@ -7,15 +7,15 @@
     <div class="book_box"
       style="width:170px; height:200px;background-color: white;border-radius: 20px;margin-left: 14px;border-radius: 20px;border-right: 2px dashed gray;">
       <div style="position:absolute; left: 20px; padding-top:30px; padding-left:30px;">
-        <img src="src/assets/fourth.png" alt="词汇类型">
+        <img :src="`http://127.0.0.1:8000/files/books/${selectedItem.bookimage}`" alt="词汇类型" style="height: 20vh;width: 14vh;">
       </div>
       <div
         style="height:200px;width:200px;position:absolute; right: -190px; padding-top:50px;background-color: white;border-radius: 20px;border-left: 2px dashed gray;">
         <ul>
           <li>今日记忆情况：</li>
-          <el-progress :percentage="50" /><br>
+          <el-progress :percentage="drate" /><br>
           <li>总记忆情况：</li>
-          <el-progress :percentage="50" />
+          <el-progress :percentage="arate" />
         </ul>
       </div>
     </div>
@@ -27,12 +27,12 @@
     </div>
     <div class="review_box" style="height:200px;">
       <div style="position:absolute; left: 10px; padding-top:50px; padding-left:5px;">
-        <img src="src/assets/condition.svg" alt="错词本" style="left:6px;"><br><br>
+        <img src="../assets/condition.svg" alt="错词本" style="left:6px;"><br><br>
         <el-button type="primary" :icon="Histogram" style="width: 135px;left:4%"
           @click="haswrong">&nbsp;错词本&nbsp;</el-button>
       </div>
       <div style="position:absolute; right: 5px; padding-top:50px; padding-right:20px">
-        <img src="src/assets/rank.svg" alt="排名情况"><br><br>
+        <img src="../assets/rank.svg" alt="排名情况"><br><br>
         <el-button type="primary" :icon="Histogram" style="width:135px;left:1%"
           @click="prank">&nbsp;&nbsp;排行榜&nbsp;&nbsp;</el-button>
       </div>
@@ -64,24 +64,23 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 <script lang="ts" >
 import axios from 'axios'
+import { wordsData,meData, booksData } from '../api';
 export default {
   name: "src\viewsHomeView.vue",
   data() {
     return {
+      drate:'',
+      arate:'',
       isShows: true,
       isNa: true,
-      isUser: false,
       changebook: false,
-      isWrong: false,
-      isRank: false,
-      isOrder: false,
-      isContact: false,
-      isLoadbook: false,
       visible: false,
-      passworddata:"",
-      username:"fan",
-      useraddress:"",
-      woid: 0
+      passworddata: "",
+      username: "fan",
+      useraddress: "",
+      woid: 0,
+      selectedItem:{bid:'',bookimage:''},
+      getword:[],
     };
   },
   methods: {
@@ -117,7 +116,35 @@ export default {
       this.$router.push('/rank')
     },
   },
-  components: { ArrowRight, ArrowLeft }
+  components: { ArrowRight, ArrowLeft },
+  mounted() {
+    this.selectedItem.bid = this.$store.state.selectedbook.bid
+    this.selectedItem.bookimage = this.$store.state.selectedbook.bookimage
+    this.getword[0] = this.$store.state.userid
+    this.getword[1] = this.selectedItem.bid
+    
+    wordsData(this.getword)
+      .then((res) => {
+        this.$store.dispatch('loadwordsData', this.getword);
+      })
+    meData(this.$store.state.userid)
+      .then((res) => {
+        this.drate = res.data[0];
+        this.arate = res.data[1];
+      })
+    booksData(this.$store.state.userid)
+      .then((res) => {
+        this.$store.dispatch('loadbooksData', this.$store.state.userid);
+      })
+  },
+  computed: {
+    wordsData() {
+      return this.$store.state.wordsData;
+    },
+    booksData() {
+      return this.$store.state.booksData;
+    },
+  },
 }
 </script>
 <style lang="less" scoped>

@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
 
-import { userData } from '@/api'
-import { goodsData } from '@/api'
+import { userData,goodsData,wordsData,ordersData,booksData } from '../api'
 const store = createStore({
     state: {
         userid:'',
@@ -12,6 +11,10 @@ const store = createStore({
         integral: '',
         userimage:'',
         gdata: [],
+        wdata:[],
+        odata:[],
+        bdata:[],
+        selectedbook:{bid:'CET6_2',bname:'六级',bookimage:'cet6.jfif',bamount:'',progress:''},
     },
     actions: {
         loaduserData(context, value) {
@@ -23,11 +26,25 @@ const store = createStore({
             goodsData(value).then(data => {
                 context.commit('LoadgoodsDataOver', data)
             })
+        },
+        loadwordsData(context, value) {
+            wordsData(value).then(data => {
+                context.commit('LoadwordsDataOver', data)
+            })
+        },
+        loadordersData(context, value) {
+            ordersData(value).then(data => {
+                context.commit('LoadordersDataOver', data)
+            })
+        },
+        loadbooksData(context, value) {
+            booksData(value).then(data => {
+                context.commit('LoadbooksDataOver', data)
+            })
         }
     },
     mutations: {
         LoaduserDataOver(state, value) {
-            console.log(value);
             state.userid = value.data.uid;
             state.userphone = value.data.userphone;
             state.passworddata = value.data.password;
@@ -38,8 +55,24 @@ const store = createStore({
         },
         LoadgoodsDataOver(state, value) {
             state.gdata = value.data;
-            console.log(state.gdata);
+        },
+        LoadwordsDataOver(state, value) {
+            state.wdata = value.data;
+        },
+        LoadordersDataOver(state, value) {
+            state.odata = value.data;
+        },
+        LoadbooksDataOver(state, value) {
+            state.bdata = value.data;
+        },
+        setSelectedBook(state, value) {
+            state.selectedbook.bid = value.bid;
+            state.selectedbook.bname = value.bname;
+            state.selectedbook.bookimage = value.bookimage;
+            state.selectedbook.bamount = value.bamount;
+            state.selectedbook.progress = value.progress;
         }
+
     },
     getters: {
     }

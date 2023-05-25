@@ -26,6 +26,16 @@
     <br>
     <br>
     <el-button-group type="plain">
+      <el-button class="person_box" :icon="Promotion"
+        @click="watchorder">我的订单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<el-icon
+          class="el-icon--right">
+          <ArrowRight />
+        </el-icon>
+      </el-button>
+    </el-button-group>
+    <br>
+    <br>
+    <el-button-group type="plain">
       <el-button class="person_box" :icon="UploadFilled"
         @click="loadbook">上传书本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;<el-icon
           class="el-icon--right">
@@ -65,6 +75,7 @@
 <script lang="ts" >
 import axios from 'axios'
 import { Cell } from 'vant';
+import { ordersData } from '../api';
 export default {
   name: "src\User.vue",
   components: {
@@ -102,12 +113,16 @@ export default {
       //跳转到主界面
       this.$router.push('/home')
     },
+    watchorder(){
+      this.$router.push('/order')
+    }
   },
   mounted() {
     this.nickname = this.$store.state.username;
     console.log(this.nickname);
     this.userimage = 'http://127.0.0.1:8000/files/' + this.$store.state.userphone;
     console.log(this.userimage);
+    this.$store.dispatch('loadordersData', this.$store.state.userid);
   }
 }
 </script>

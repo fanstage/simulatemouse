@@ -9,7 +9,7 @@
             <el-button type="primary" :icon="Search">搜索</el-button>
         </div>
         <el-container style="height: 540px; overflow-y: auto;display: flex; flex-direction: column;">
-            <van-card v-for="item in goodData" :key="item.gid" :price="item.gprice" :title="item.gname"
+            <van-card v-for="item in goodData" :key="item.gid" :price="item.gprice" :title="item.gname" :desc="item.gid"
                 :thumb="`http://127.0.0.1:8000/files/goods/${item.gid}`">
                 <template #footer>
                     <van-button size="mini" @click="tobuy(item)">购买</van-button>
@@ -26,8 +26,6 @@
     </div>
 </template>
 <script lang="ts" >
-import axios from 'axios'
-import { goodsData } from '../api';
 export default {
     name: "src\Shop.vue",
     data() {

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Login from '../views/login/login.vue'
+import Login from '../views/login.vue'
 import Buy from '../views/Buy.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -80,6 +80,11 @@ const router = createRouter({
       name:'rank',
       component:()=>import('../views/Rank.vue')
     },
+    {
+      path:'/order',
+      name:'order',
+      component:()=>import('../views/Order.vue')
+    }
   ]
 })
 

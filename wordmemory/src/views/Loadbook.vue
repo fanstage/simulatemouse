@@ -10,7 +10,7 @@
       <img src="../assets/shili.png" alt="示例" style="height: 100%;width:100%;">
     </div>
     <div style="padding-top:10px;padding-left: 38%;">
-      <van-uploader action="http://127.0.0.1:8000/upload">
+      <van-uploader :after-read="afterRead">
         <van-button icon="plus" type="primary">上传文件</van-button>
       </van-uploader>
     </div>
@@ -18,6 +18,7 @@
 </template>
 <script lang="ts" >
 import axios from 'axios'
+
 export default {
   name: "src\Loadbook.vue",
   data() {
@@ -32,10 +33,14 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import router from '../router/index';
-import { ArrowLeft, ArrowRight, Avatar, CloseBold, Delete, Edit, Histogram, HomeFilled, Menu, Promotion, Search, Share, StarFilled, SuccessFilled, Upload, UploadFilled, UserFilled } from '@element-plus/icons-vue'
+import { addBook } from '../api'
 const afterRead = (file) => {
-  // 此时可以自行将文件上传至服务器
-  console.log(file);
-};
+      // 此时可以自行将文件上传至服务器
+      let formdata = new FormData();
+      formdata.append("file", file.file);
+      addBook(formdata).then(res => {
+        console.log(res)
+      })
+      console.log(file);
+    };
 </script>

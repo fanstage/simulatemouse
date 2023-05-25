@@ -48,6 +48,14 @@ const errorData = (userid)=>{
     )
 }
 
+const meData = (userid)=>{
+    return requests({
+        url:'/con/'+userid,
+        method:'get',
+    }
+    )
+}
+
 const rankData = ()=>{
     return requests({
         url:'/rank',
@@ -72,21 +80,61 @@ const goodsData = ()=>{
     }
     )
 }
-const addOrder = (order)=>{
+// const wordsData = (userid,bid)=>{
+//     return requests({
+//         url:'/words/'+userid+'/'+bid,
+//         method:'get',
+//     }
+//     )
+// }
+const wordsData = (id)=>{
     return requests({
-        url:"/order",
+        url:'/words/'+id[0]+'/'+id[1],
+        method:'get',
+    }
+    )
+}
+const addOrder = (data)=>{
+    return requests({
+        url:'/orders',
         method:'post',
-        params:{
-            order_id:order.id,
-            order_time:order.time,
-            order_oripay:order.oripay,
-            order_backmoney:order.backmoney,
-            order_pay:order.pay,
-            order_state:order.state,
-            order_uphone:order.uphone,
-            order_sid:order.sid,
-            order_gasId:order.gasId
-        }
+        data:data
+    })
+}
+
+const ordersData = (userid)=>{
+    return requests({
+        url:'/orders/'+userid,
+        method:'get',
+    })
+}
+
+const booksData = (userid)=>{
+    return requests({
+        url:'/books/'+userid,
+        method:'get',
+    })
+}
+const addRecord = (data)=>{
+    return requests({
+        url:'/records',
+        method:'post',
+        data:data
+    })
+}
+
+const addError = (data)=>{
+    return requests({
+        url:'/errors',
+        method:'post',
+        data:data
+    })
+}
+const addBook = (data)=>{
+    return requests({
+        url:'/upload',
+        method:'post',
+        data:data
     })
 }
 export {
@@ -99,4 +147,11 @@ export {
     userRegister,
     userUpdate,
     goodsData,
+    wordsData,
+    addRecord,
+    addError,
+    meData,
+    addBook,
+    ordersData,
+    booksData
 }
