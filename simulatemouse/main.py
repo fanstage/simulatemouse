@@ -5,8 +5,8 @@ import numpy as np
 last_clipboard_content = ''
 screenshot = pyautogui.screenshot()
 # 将 PIL 图像转换为 OpenCV 图像
-screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-# 加载要检测的图像（例如微信图标）
+screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_BGR2GRAY)
+# 加载要检测的图像（例如微信图标）上港家园
 template = cv2.imread('wechat.png', 0)
 # 使用模板匹配算法在屏幕截图中查找特定的图像
 res = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
@@ -89,7 +89,7 @@ def geturl2(x, y):
     pyautogui.PAUSE = 1
 
 
-pyautogui.click(420, 1061)
+# pyautogui.click(420, 1061)
 pyautogui.PAUSE = 1
 # foo用来接送输入的字符串
 foo = u'上港家园'
