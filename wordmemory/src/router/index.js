@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/login.vue'
 import Buy from '../views/Buy.vue'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -84,6 +84,12 @@ const router = createRouter({
       path:'/order',
       name:'order',
       component:()=>import('../views/Order.vue')
+    },
+    //将test.vue加到路由中
+    {
+      path:'/test',
+      name:'test',
+      component:()=>import('../views/test.vue')
     }
   ]
 })

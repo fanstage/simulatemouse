@@ -137,6 +137,13 @@ const addBook = (data)=>{
         data:data
     })
 }
+const testword = (userid)=>{
+    return requests({
+        url:'/test/'+userid,
+        method:'get',
+    })
+}
+
 export {
     userLogin,
     addOrder,
@@ -153,5 +160,6 @@ export {
     meData,
     addBook,
     ordersData,
-    booksData
+    booksData,
+    testword
 }

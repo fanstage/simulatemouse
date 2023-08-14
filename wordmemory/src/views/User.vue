@@ -75,7 +75,7 @@
 <script lang="ts" >
 import axios from 'axios'
 import { Cell } from 'vant';
-import { ordersData } from '../api';
+import { ordersData,testword } from '../api';
 export default {
   name: "src\User.vue",
   components: {
@@ -86,6 +86,7 @@ export default {
       inputgoods: '',
       nickname: '',
       userimage: '',
+      userid: '',
     }
   },
   methods: {
@@ -123,6 +124,11 @@ export default {
     this.userimage = 'http://127.0.0.1:8000/files/' + this.$store.state.userphone;
     console.log(this.userimage);
     this.$store.dispatch('loadordersData', this.$store.state.userid);
+    this.userid = this.$store.state.userid;
+    testword(this.userid).then((res) => {
+      this.$store.dispatch('loadtestData',this.userid)
+    }
+    )
   }
 }
 </script>

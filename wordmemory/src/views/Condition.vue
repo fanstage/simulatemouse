@@ -4,6 +4,9 @@
       <van-nav-bar title="记忆情况" left-text="返回" left-arrow @click-left="returnUser" />
     </div>
     <div>
+      <button @click="test">test</button>
+    </div>
+    <div>
       <van-tabs v-model:active="activeName">
         <van-tab title="本日" name="a">
           <div style="padding-left: 10px;padding-top: 20px;">
@@ -21,6 +24,7 @@
 </template>
 <script lang="ts" >
 import axios from 'axios'
+import { testword } from '../api';
 export default {
   name: "src\Condition.vue",
   data(){
@@ -32,8 +36,12 @@ export default {
     returnUser(){
       this.$router.push('/user')
     },
+    test(){
+      this.$router.push('/test')
+    }
   },
-  }
+  mounted(){
+  }}
 </script>
 <script lang="ts" setup>
 import { onMounted,computed } from 'vue';
@@ -95,7 +103,8 @@ onMounted(() => {
     option2.value.series[0].data[0].value = res.data[3];
     option2.value.series[0].data[1].value = res.data[4];
     option2.value.series[0].data[2].value = res.data[5];
-});
+},
+);
 });
 </script>
 <style>

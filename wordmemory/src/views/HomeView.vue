@@ -1,11 +1,7 @@
 <template>
   <div class="home" style="margin:0px 15px;" v-show="isShows">
-    <div class="search-box" style="height:48px;margin-bottom: 10px;display: flex;">
-      <el-input v-model="input" placeholder="请输入单词" clearable />
-      <el-button type="primary" :icon="Search">搜索</el-button>
-    </div>
     <div class="book_box"
-      style="width:170px; height:200px;background-color: white;border-radius: 20px;margin-left: 14px;border-radius: 20px;border-right: 2px dashed gray;">
+      style="margin-top:5vh;width:170px; height:200px;background-color: white;border-radius: 20px;margin-left: 14px;border-radius: 20px;border-right: 2px dashed gray;">
       <div style="position:absolute; left: 20px; padding-top:30px; padding-left:30px;">
         <img :src="`http://127.0.0.1:8000/files/books/${selectedItem.bookimage}`" alt="词汇类型" style="height: 20vh;width: 14vh;">
       </div>

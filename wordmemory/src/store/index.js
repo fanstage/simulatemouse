@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 
-import { userData,goodsData,wordsData,ordersData,booksData } from '../api'
+import { userData,goodsData,wordsData,ordersData,booksData,testword } from '../api'
 const store = createStore({
     state: {
         userid:'',
@@ -14,6 +14,7 @@ const store = createStore({
         wdata:[],
         odata:[],
         bdata:[],
+        tdata:[],
         selectedbook:{bid:'CET6_2',bname:'六级',bookimage:'cet6.jfif',bamount:'',progress:''},
     },
     actions: {
@@ -41,7 +42,13 @@ const store = createStore({
             booksData(value).then(data => {
                 context.commit('LoadbooksDataOver', data)
             })
+        },
+        loadtestData(context, value) {
+            testword(value).then(data => {
+                context.commit('LoadtestDataOver', data)
+            })
         }
+
     },
     mutations: {
         LoaduserDataOver(state, value) {
@@ -71,6 +78,9 @@ const store = createStore({
             state.selectedbook.bookimage = value.bookimage;
             state.selectedbook.bamount = value.bamount;
             state.selectedbook.progress = value.progress;
+        },
+        LoadtestDataOver(state, value) {
+            state.tdata = value.data;
         }
 
     },
